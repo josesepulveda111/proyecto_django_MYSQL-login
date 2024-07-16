@@ -1,0 +1,43 @@
+{% include 'inc/header.html' %}
+{% load static %}
+
+<div class="ui container">
+    <center>
+        <h1>Clientes Activos</h1>
+    </center>
+    <br>
+    <table class="ui green table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
+                <th>Telefono</th>
+                <th>Correo</th>
+                <th>Direccion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in clientes %}
+            <tr>
+            <td>{{ c.1 }}</td>
+            <td>{{ c.2 }}</td>
+            <td>{{ c.3 }}</td>
+            <td>{{ c.4 }}</td>
+            <td>{{ c.5 }}</td>
+            <td>{{ c.6 }}</td>
+            <td>
+                <center>
+                <a href="/cliente/actualizarc/{{ c.0 }}"><i class="blue edit icon"></i></a>
+                <a href="/cliente/inactivar/{{ c.0 }}"><i class="red trash alternate icon"></i></a>
+                </center>
+            </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+</div>
+
+{% include 'inc/footer.html' %}

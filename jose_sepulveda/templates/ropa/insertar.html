@@ -1,0 +1,149 @@
+{% include 'inc/header.html' %}
+
+
+<div class="ui container">
+    <h1>Registrar una Prenda</h1>
+    <br>
+    <form class="ui form" method="POST" enctype="multipart/form-data" action="">
+        {% csrf_token %}
+        <div class="four fields">
+            <div class="field">
+                <label for="">Nombre Prenda</label>
+                <div class="ui left icon input">
+                    <input type="text" name="nombre_prenda" id="" placeholder="Ingrese el Nombre">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Tipo de Prenda</label>
+                    <div class="ui left icon input">
+                    <input type="text"  name="tipo_prenda" placeholder="Camisa, chaqueta, jean...">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">talla</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="talla" placeholder="Ingrese la Talla">
+                    <i class="tag icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Color</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="color" placeholder="Ingrese el Color de la Prenda">
+                    <i class="circle icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="four fields">
+            <div class="field">
+                <label for="">Descripcion</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="descripcion" placeholder="Ingrese La Descripcion">
+                    <i class="info icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Material</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="material" placeholder="Ingrese el Material de la Prenda">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Marca</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="marca" placeholder="Ingrese La Marca">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Recomendaciones</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="recomendaciones" placeholder="Ingrese alguna recomendacion">
+                    <i class="info icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Foto de la prenda</label>
+                <input type="file" name="foto" accept="image/*">
+            </div>
+            <div class="field">
+                <label for="">Valor de la Prenda</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="precio" placeholder="Ingrese el precio">
+                    <i class="money bill alternate icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Unidades</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="unidades" placeholder="Ingrese el stock de la prenda">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Proveedor</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="proveedor" placeholder="Ingrese el proveedor">
+                    <i class="shipping fast icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="field">
+                <label for="">Instrucciones</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="instrucciones" placeholder="Instruccion de lavado y de uso">
+                    <i class="info icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Pais Origen</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="pais_origen" placeholder="Ingrese el Pais de Origen">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Empaque</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="empaque" placeholder="Ingrese el empaque de la Prenda">
+                    <i class="boxes icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">SKU</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="sku" placeholder="Ingrese el SKU">
+                    <i class="exclamation triangle icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Descuento</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="descuento" placeholder="Ingrese si hay algun descuento%">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <center>
+            <div>
+                <button class="ui green button">Guardar Registro</button>
+            </div>
+        </center>
+        <br>
+    </form>
+</div>
+
+{% include 'inc/footer.html' %}

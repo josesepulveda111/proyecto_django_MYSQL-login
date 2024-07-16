@@ -1,0 +1,203 @@
+{% include "inc/header.html" %}
+{% load static %}
+
+<div class="ui container">
+    <h1>Registrar Factura</h1>
+    <br>
+    <hr>
+    <form method="POST" class="ui form ">
+        {% csrf_token %}
+        <div class="three fields">
+            <div class="field">
+                <label for="">Cedula del Cliente</label>
+                <div class="ui left icon input">
+                    <input type="number" name="cedula" id="cedula" placeholder="Ingrese la Cedula">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <br>
+                <label for=""></label>
+                <input type="button" value="Consultar Cliente" class="ui blue button" onclick="consultarclienteapi()">
+            </div>
+        </div>
+        <div class="three fields">
+            <div class="field">
+                <label for="">Fecha de la Factura</label>
+                <input type="date" name="fechafactura" id="fechafactura">
+            </div>
+            <div class="field">
+                <label>Metodo de Pago</label>
+                <div class="ui selection dropdown">
+                    <input type="hidden" name="metodo_pago">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">Metodo de pago...</div>
+                        <div class="menu">
+                            <div class="item" value="efectivo" id="efectivo">Efectivo</div>
+                            <div class="item" value="tarjeta_credito" id="tarjeta_credito">Tarjeta de Credito</div>
+                            <div class="item" value="tarjeta_debito" id="tarjeta_debito">Tarjeta de Debito</div>
+                        </div>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Descripcion</label>
+                <div class="ui left icon input">
+                    <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion...">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="two fields">
+            <div class="field">
+                <h3 id="nombrecliente">Nombre del Cliente:</h3>
+                <input type="hidden" name="idcliente" id="idcliente" value="">
+            </div>
+            <div class="field">
+                <h3 id="celularcliente">Celular del Cliente:</h3>
+            </div>
+        </div>
+        <hr>
+
+        <div class="ui link cards">
+            {% for r in ropa %}
+            <div class="card">
+                <div class="image">
+                    <img src="{% static 'Img/' %}{{ r.foto }}">
+                </div>
+                <div class="content">
+                    <span class="header">{{ r.nombre_prenda }}</span>
+                    <div class="meta">
+                        <span class="date">Tipo de Prenda {{ r.tipo_prenda }}</span>
+                        <br>
+                        <span class="date">Talla: {{ r.talla }}</span>
+                        <br>
+                        <span class="date">Color: {{ r.color }}</span>
+                        <br>
+                        <span class="date">Descripcion {{ r.descripcion }}</span>
+                        <br>
+                        <span class="date">Precio {{ r.precio }}</span>
+                        <br>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <center>
+                        <button type="button" href="#" onclick="agregarproducto('{{r.id}}','{{r.nombre_prenda}}','{{r.precio}}')" class="ui green button">Agregar</button>
+                    </center>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+          <table class="ui blue table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre de la Prenda</th>
+                    <th>Cantidad</th>
+                    <th>Precio Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="newfile">
+                
+            </tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td id="totalfactura">Total Factura:</td>
+                <input type="hidden" name="totalfacturainput" id="totalfacturainput" value="">
+                <td></td>
+            </tr>
+        </table>
+        <br>
+
+        <center>
+            <div>
+                <input type="submit" value="Guardar Factura" class="ui green button">
+            </div>
+        </center>
+    </form>
+    <br>
+    <hr>
+    <br>
+</div>
+
+<script>
+    c = 1;
+    totalfactura = 0;
+
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+            .closest('.message')
+            .transition('fade')
+            ;
+        })
+    ;
+
+    function consultarclienteapi(){
+        let idcliente = document.getElementById('cedula').value;
+        let url = "/cliente/Api/" + idcliente;
+        fetch(url)
+        .then(data => data.json())
+        .then(data => {
+            if(data.length == 0){
+                alert("No existe un usuario con esa cedula chamo")
+                document.getElementById("nombrecliente").innerHTML = "Nombre del Cliente: ";
+                document.getElementById("idcliente").innerHTML = "ID del Cliente: ";
+                document.getElementById("celularcliente").innerHTML = "Celular del Cliente: ";
+            }
+            else
+            {
+                document.getElementById("idcliente").value = data[0].pk;
+                document.getElementById("nombrecliente").innerHTML = "Nombre del Cliente: " + data[0].fields.nombre_cliente
+                document.getElementById("celularcliente").innerHTML = "Celular del Cliente: " + data[0].fields.telefono
+            }
+        })
+    }
+
+    function agregarproducto(id,nombre_prenda,precioprenda){
+
+        idcantidadprenda = document.getElementById('cantidad'+id);
+        if (idcantidadprenda == null){
+            $('#newfile').append("\
+                <tr id='f"+c+"'>\
+                    <td>"+c+"</td>\
+                    <td>"+nombre_prenda+"</td>\
+                    <td id='cantidad"+id+"'>1</td>\
+                    <input type='hidden' name='idprendatabla[]' id='idprendatabla' value='"+id+"'>\
+                    <input type='hidden' name='cantidadprendatabla[]' id='cantidadprendatabla"+id+"' value='1'>\
+                    <td id='p"+id+"'>"+precioprenda+"</td>\
+                    <td><i onclick='eliminarfile("+c+","+id+")' class='ui red alternate trash icon'></i></td>\
+                </tr>\
+            ");   
+            c = c + 1;
+            totalfactura = totalfactura + parseInt(precioprenda);
+            document.getElementById("totalfactura").innerHTML = "Total Factura: $" + totalfactura;
+        }else{
+            cantidadprenda= document.getElementById('cantidad'+id).textContent;
+            operacioncantidad = parseInt(cantidadprenda) + 1;
+            document.getElementById('cantidad'+id).innerHTML = operacioncantidad;
+            document.getElementById('cantidadprendatabla'+id).value = operacioncantidad;
+            document.getElementById('p'+id).innerHTML = operacioncantidad * precioprenda;
+            // cambios kuis fonsi
+            totalfactura = totalfactura + parseInt(precioprenda);
+            document.getElementById("totalfactura").innerHTML = "Total Factura: $" + totalfactura;
+        }
+        document.getElementById("totalfacturainput").value = totalfactura;
+    }
+
+    function eliminarfile(fila,id){
+        objeto = parseInt(document.getElementById("p"+id).textContent);
+        totalfactura = totalfactura - objeto;
+        document.getElementById("totalfactura").innerHTML = "Total Factura: $" + totalfactura;
+        $('#f'+fila).remove();
+        document.getElementById("totalfacturainput").value = totalfactura;
+    }
+</script>
+
+
+{% include "inc/footer.html" %}

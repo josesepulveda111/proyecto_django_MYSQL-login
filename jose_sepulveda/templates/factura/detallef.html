@@ -1,0 +1,107 @@
+{% load static %}
+{% include "inc/header.html" %}
+
+<div class="ui container">
+    <h1>Detalle de la Factura</h1><br>
+    <hr><br>
+    {% for d in detalle %}
+        {% if forloop.first %}
+            <h4 id="nombrecliente">Nombre Cliente: {{ d.12 }}</h4>
+            <h4 id="apellidocliente">Apellido Cliente: {{ d.13 }}</h4>
+            <h4 id="celularcliente">Celular Cliente: {{ d.11 }}</h4>
+            <h4 id="cedulacliente">Cedula Cliente: {{ d.10 }}</h4>
+            <h4 id="fechafactura">Fecha Factura: {{ d.5 }}</h4>
+            <h4 id="totalfactura">Total: {{ d.7 }}</h4>
+            <h4 id="metodo_pago">Metodo de Pago: {{ d.8 }}</h4>
+        {% endif %}
+    {% endfor %}
+    <br>
+    <hr><br>
+
+    <table id="tabla-detalle" class="ui blue table">
+        <thead>
+            <tr>
+                <th>Nombre de la Prenda</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad de Prendas</th>
+                <th>Subtotal </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for d in detalle %}
+            <tr>
+                <td id="nombrePrenda">{{ d.2 }}</td>
+                <td id="precioPrenda">{{ d.3 }}</td>
+                <td id="cantidad">{{ d.6 }}</td>
+                <td id="subtotal"></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="centrarboton">
+        <button onclick="imprimir()" class="ui blue button">Imprimir factura</button>
+    </div>
+</div>
+
+
+<script>
+    function calcularSubtotales() {
+        var total = 0;
+        var rows = document.querySelectorAll("#detalle-tabla tr");
+        rows.forEach(function(row) {
+            var cols = row.querySelectorAll("td");
+            var precioPrenda = parseFloat(cols[1].textContent);
+            var cantidadPrenda = parseFloat(cols[2].textContent);
+            var subtotal = (precioPrenda * cantidadPrenda).toFixed(2);
+            cols[3].textContent = subtotal; // Actualiza la celda del subtotal
+            total += parseFloat(subtotal);
+        });
+        // Actualiza el total en el HTML
+        var totalElement = document.getElementById("total-amount");
+        if (totalElement) {
+            totalElement.textContent = total.toFixed(2);
+        } else {
+            console.error("No se encontró el elemento con id 'total-amount'");
+        }
+    }
+
+    function imprimir(){
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a3');
+
+        var title = "Detalle de la factura";
+        doc.text(title, 120, 110);
+
+        var nombrecliente = document.getElementById('nombrecliente').textContent;
+        var imagensuperior = new Image();
+        imagensuperior.src = "{% static 'img/banner/membrete-superior1.2.png' %}";
+        doc.addImage(imagensuperior, 'PNG', 0, 0, 300, 100); 
+        imagensuperior.src = "{% static 'img/banner/membrete-inferior1.2.png' %}";
+        doc.addImage(imagensuperior, 'PNG', 0, 320, 300, 100); 
+        var apellidocliente = document.getElementById('apellidocliente').textContent;
+        var celularcliente = document.getElementById('celularcliente').textContent;
+        var cedulacliente = document.getElementById('cedulacliente').textContent;
+        var fechafactura = document.getElementById('fechafactura').textContent;
+        var totalfactura = document.getElementById('totalfactura').textContent;
+        var metodo_pago = document.getElementById('metodo_pago').textContent;
+
+        doc.text(nombrecliente, 25, 140);
+        doc.text(apellidocliente, 25, 150);
+        doc.text(celularcliente, 25, 160);
+        doc.text(cedulacliente, 25, 170);
+        doc.text(fechafactura, 25, 180);
+        doc.text(totalfactura, 25, 190);
+        doc.text(metodo_pago, 25, 200);
+        doc.autoTable({
+            styles: {fillColor: [0, 149, 234] },
+            html: '#tabla-detalle',
+            margin: {
+                left: 30,
+                top:250
+            },
+        });
+        doc.save("JS|MST.pdf");
+    }
+</script>
+
+{% include "inc/footer.html" %}

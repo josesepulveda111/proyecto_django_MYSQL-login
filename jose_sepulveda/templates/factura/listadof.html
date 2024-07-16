@@ -1,0 +1,43 @@
+{% include "inc/header.html" %}
+
+<div class="ui container">
+    <h1>Listado de Facturas</h1>
+    <table class="ui blue table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in factura %}
+            <tr>
+                <td>{{ f.id }}</td>
+                <td>{{ f.fecha }}</td>
+                <td>{{ f.cliente.nombre_cliente }}</td>
+                <td>{{ f.total }}</td>
+                <td>
+                    <i onclick="borrar('{{f.id}}')" class="ui red alternate trash icon" aria-hidden="true" id=""></i>
+                    <a href="/factura/detallef/{{f.id}}" class="detalle-factura"><i class="ui file alternate icon" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    function borrar(id){
+        var confirmar = confirm("Esta seguro que desea borrar?")
+        if (confirmar){
+            location.href = "/factura/borrar/" + id;
+        }
+        else{
+            alert("Estre registro no sera borrado")
+        }
+    }
+</script>
+
+{% include "inc/footer.html" %}

@@ -1,0 +1,47 @@
+{% include 'inc/header.html' %}
+{% load static %}
+
+<center><h1>Prendas Inactivas</h1></center>
+<br>
+
+<div class="ui container">
+  <div class="ui special cards">
+    {% for r in ropa %}
+    <div class="card">
+      <div class="blurring dimmable image">
+        <div class="ui dimmer">
+          <div class="content">
+            <div class="center">
+                <a href="/ropa/activar/{{ r.0 }}" class="ui inverted button">Activar</a>
+                <a href="/ropa/actualizar/{{ r.0 }}" class="right floated">
+                    <button class="ui inverted blue button">Actualizar</button>
+                </a>
+            </div>
+          </div>
+        </div>
+        <img src="{% static 'Img/' %}{{ r.6 }}">
+      </div>
+      <div class="content">
+        <span class="header">{{ r.1 }}</span>
+        <div class="meta">
+          <span class="date">Tipo de Prenda {{ r.2 }}</span>
+          <br>
+          <span class="date">Talla: {{ r.3 }}</span>
+          <br>
+          <span class="date">Color: {{ r.4 }}</span>
+          <br>
+          <span class="date">Descripcion {{ r.5 }}</span>
+          <br>
+          <span class="date">Precio {{ r.7 }}</span>
+          <br>
+        </div>
+      </div>
+      <div class="extra content">
+        <span><i class="red check icon"></i>Inactiva</span>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% include 'inc/footer.html' %}

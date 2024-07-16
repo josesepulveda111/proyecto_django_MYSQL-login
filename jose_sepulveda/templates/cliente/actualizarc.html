@@ -1,0 +1,69 @@
+{% include 'inc/header.html' %}
+
+
+<div class="ui container">
+    {% for c in clientes %}
+    <h1>Actualizar a {{ c.nombre_cliente }}</h1>
+    <br>
+    <form class="ui form" method="POST" action="">
+        {% csrf_token %}
+        <div class="two fields">
+            <div class="field">
+                <label for="">Nombre</label>
+                <div class="ui left icon input">
+                    <input type="text" name="nombre_cliente" id="" value="{{ c.nombre_cliente }}">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Apellido</label>
+                    <div class="ui left icon input">
+                    <input type="text"  name="apellido_cliente" value="{{ c.apellido_cliente }}">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Documento de Identidad</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="cedula" value="{{ c.cedula }}">
+                    <i class="globe icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Telefono</label>
+                <div class="ui left icon input">
+                    <input type="number"  name="telefono" value="{{ c.telefono }}">
+                    <i class="phone icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Correo Electronico</label>
+                <div class="ui left icon input">
+                    <input type="email"  name="correo" value="{{ c.correo }}">
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Direccion</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="direccion" value="{{ c.direccion }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br><br>
+        <br><br>
+        <br><br>
+        <center>
+            <div>
+                <button class="ui green button">Actualizar</button>
+            </div>
+        </center>
+    </form>
+</div>
+
+{% include 'inc/footer.html' %}

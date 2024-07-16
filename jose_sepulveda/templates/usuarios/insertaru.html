@@ -1,0 +1,57 @@
+{% include 'inc/header.html' %}
+
+
+<div class="ui container">
+    <h1>Nuevo Usuario</h1>
+    <br>
+    <form class="ui form" method="POST" action="">
+        {% csrf_token %}
+        <div class="three fields">
+            <div class="field">
+                <label for="">Nombre de Usuario</label>
+                <div class="ui left icon input">
+                    <input type="text" name="username" id="" placeholder="Ingrese el usuario">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Primer Nombre</label>
+                <div class="ui left icon input">
+                    <input type="text" name="first_name" id="" placeholder="Ingrese el Nombre">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Primer Apellido</label>
+                    <div class="ui left icon input">
+                    <input type="text"  name="last_name" placeholder="Ingrese el Apellido">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Correo Electronico</label>
+                <div class="ui left icon input">
+                    <input type="email"  name="email" placeholder="Ingrese el documento">
+                    <i class="globe icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Contraseña</label>
+                <div class="ui left icon input">
+                    <input type="password"  name="password" placeholder="Ingrese el Numero de Telfono">
+                    <i class="phone icon"></i>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <center>
+            <div>
+                <button class="ui green button">Guardar Registro</button>
+            </div>
+        </center>
+    </form>
+</div>
+
+{% include 'inc/footer.html' %}

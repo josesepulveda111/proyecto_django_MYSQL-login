@@ -1,0 +1,68 @@
+{% include 'inc/header.html' %}
+
+
+<div class="ui container">
+    <h1>Registrar un Cliente</h1>
+    <br>
+    <form class="ui form" method="POST" action="">
+        {% csrf_token %}
+        <div class="two fields">
+            <div class="field">
+                <label for="">Nombre</label>
+                <div class="ui left icon input">
+                    <input type="text" name="nombre_cliente" id="" placeholder="Ingrese el Nombre">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Apellido</label>
+                    <div class="ui left icon input">
+                    <input type="text"  name="apellido_cliente" placeholder="Ingrese el Apellido">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Documento de Identidad</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="cedula" placeholder="Ingrese el documento">
+                    <i class="address card icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Telefono</label>
+                <div class="ui left icon input">
+                    <input type="number"  name="telefono" placeholder="Ingrese el Numero de Telfono">
+                    <i class="phone icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Correo Electronico</label>
+                <div class="ui left icon input">
+                    <input type="email"  name="correo" placeholder="@">
+                    <i class="envelope icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Direccion</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="direccion" placeholder="Ingrese La direccion">
+                    <i class="home icon"></i>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <br><br>
+        <br><br>
+        <center>
+            <div>
+                <button class="ui green button">Guardar Registro</button>
+            </div>
+        </center>
+    </form>
+</div>
+
+{% include 'inc/footer.html' %}

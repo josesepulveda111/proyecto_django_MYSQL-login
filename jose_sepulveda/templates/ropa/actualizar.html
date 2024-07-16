@@ -1,0 +1,152 @@
+{% include 'inc/header.html' %}
+{% load static %}
+
+<div class="ui container">
+    {% for r in ropa %}
+    <h1>Actualizar la prenda {{ r.nombre_prenda }}</h1>
+    <br>
+    <form class="ui form" method="POST" enctype="multipart/form-data" action="">
+        {% csrf_token %}
+        <div class="four fields">
+            <div class="field">
+                <label for="">Nombre Prenda</label>
+                <div class="ui left icon input">
+                    <input type="text" name="nombre_prenda" id="" value="{{ r.nombre_prenda }}">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Tipo de Prenda</label>
+                    <div class="ui left icon input">
+                    <input type="text"  name="tipo_prenda" value="{{ r.tipo_prenda }}">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Talla</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="talla" value="{{ r.talla }}">
+                    <i class="globe icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Color</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="color" value="{{ r.color }}">
+                    <i class="phone icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="four fields">
+            <div class="field">
+                <label for="">Descripcion</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="descripcion" value="{{ r.descripcion }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Material</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="material" value="{{ r.material }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Marca</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="marca" value="{{ r.marca }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Recomendaciones</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="recomendaciones" value="{{ r.recomendaciones }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Foto de la prenda</label>
+                <input type="file" name="foto" accept="image/*">
+                <h3>La prenda anterior es: </h3>
+                <img src="{% static 'Img/' %}{{ r.foto }}" width="200" height="200" alt="...">
+                <input type="hidden" name="fotovieja" id="fotovieja" value="{{ r.foto }}">
+            </div>
+            <div class="field">
+                <label for="">Precio de la Prenda</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="precio" value="{{ r.precio }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Unidades</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="unidades" value="{{ r.unidades }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Proveedor</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="proveedor" value="{{ r.proveedor }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="field">
+                <label for="">Instrucciones</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="instrucciones" value="{{ r.instrucciones }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div> 
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">Pais Origen</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="pais_origen" value="{{ r.pais_origen }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Empaque</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="empaque" value="{{ r.empaque }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="">SKU</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="sku" value="{{ r.sku }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Descuento</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="descuento" value="{{ r.descuento }}">
+                    <i class="trophy icon"></i>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <center>
+            <div>
+                <button class="ui green button">Actualizar</button>
+            </div>
+        </center>
+    </form>
+</div>
+
+{% include 'inc/footer.html' %}

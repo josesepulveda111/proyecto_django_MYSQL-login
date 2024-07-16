@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/semantic.min.css' %}">
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/semantic.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>JS_MONASTERY</title>
+</head>
+<body>
+    <div class="ui inverted segment">
+        <div class="ui inverted secondary pointing menu">
+          <div class="ui dropdown item">
+            Clientes
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <a href="/cliente/insertarc" class="item">Registrar un Cliente</a>
+              <a href="/cliente/listadoc" class="item">Clientes Activos</a>
+              <a href="/cliente/listadoi" class="item">Clientes Inactivos</a>
+            </div>
+          </div>
+          <div class="ui dropdown item">
+            Ropa
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <a href="/ropa/insertar" class="item">Registrar una Prenda</a>
+              <a href="/ropa/listadoa" class="item">Prendas Activas</a>
+              <a href="/ropa/listadoi" class="item">Prendas Inactivas</a>
+            </div>
+          </div>
+          <div class="ui dropdown item">
+              Factura
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <a href="/factura/insertarf" class="item">Registrar una Factura</a>
+                <a href="/factura/listadof" class="item">Listado de Facturas</a>
+              </div>
+          </div>
+          <div class="right menu">
+            <a href="/usuarios/login" class="ui item ">
+              Login
+            </a>
+            <a href="/usuarios/logout" class="ui item ">
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>

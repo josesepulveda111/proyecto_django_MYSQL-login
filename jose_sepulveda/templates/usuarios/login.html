@@ -1,0 +1,38 @@
+{% include 'inc/header.html' %}
+
+
+<div class="ui container">
+    <h1>Iniciar Sesion</h1>
+    <br>
+    <form class="ui form" method="POST" action="">
+        {% csrf_token %}
+        <div class="two fields">
+            <div class="field">
+                <label for="">Nombre de Usuario</label>
+                <div class="ui left icon input">
+                    <input type="text"  name="username" placeholder="Ejemplo: pedrito11">
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label for="">Contraseña</label>
+                <div class="ui left icon input">
+                    <input type="password"  name="password" placeholder="Password">
+                    <i class="phone icon"></i>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        {% if mensaje %}
+            {{ mensaje }}
+        {% endif %}
+        <center>
+            <div>
+                <a href="/usuarios/insertaru" type="button" class="ui blue button">Registrate</a>
+                <input type="submit" class="ui green button" value="Iniciar Sesion">
+            </div>
+        </center>
+    </form>
+</div>
+
+{% include 'inc/footer.html' %}
